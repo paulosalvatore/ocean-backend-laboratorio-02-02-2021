@@ -27,7 +27,11 @@ app.get('/mensagens', (req, res) => {
 
 // Criar (Create)
 app.post('/mensagens', (req, res) => {
-  res.send(req.body.texto);
+  const mensagem = req.body.texto;
+
+  mensagens.push(mensagem);
+
+  res.send('Mensagem criada com sucesso.');
 });
 
 app.listen(port, () => {

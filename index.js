@@ -1,14 +1,35 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
+
+app.use(bodyParser.json());
+
+const port = 3000;
+
+/*
+Create, Read (All/Single), Update & Delete
+Criar, Ler (Tudo ou Individual), Atualizar e Remover
+*/
+
+const mensagens = [
+  "Primeira mensagem",
+  "Segunda mensagem"
+];
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+// Ler Tudo (Read All)
 app.get('/mensagens', (req, res) => {
-  res.send('Exibir todas as mensagens.');
+  res.send(mensagens);
 });
 
-app.listen(3000, () => {
-  console.info('Servidor rodando em http://localhost:3000');
+// Criar (Create)
+app.post('/mensagens', (req, res) => {
+  res.send(req.body.texto);
+});
+
+app.listen(port, () => {
+  console.info('Servidor rodando em http://localhost:' + port);
 });

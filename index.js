@@ -31,7 +31,7 @@ app.post('/mensagens', (req, res) => {
 
 // Ler Tudo (Read All)
 app.get('/mensagens', (req, res) => {
-  res.send(mensagens);
+  res.send(mensagens.filter(Boolean));
 });
 
 // Ler Individual (Read Single)

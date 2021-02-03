@@ -36,11 +36,22 @@ app.get('/mensagens', (req, res) => {
 
 // Ler Individual (Read Single)
 app.get('/mensagens/:id', (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id - 1;
 
   const mensagem = mensagens[id];
   
   res.send(mensagem);
+});
+
+// Atualizar (Update)
+app.put('/mensagens/:id', (req, res) => {
+  const id = req.params.id - 1;
+
+  const mensagem = req.body.texto;
+
+  mensagens[id] = mensagem;
+
+  res.send('Mensagem editada com sucesso.');
 });
 
 app.listen(port, () => {

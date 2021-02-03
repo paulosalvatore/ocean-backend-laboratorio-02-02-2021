@@ -12,8 +12,14 @@ Criar, Ler (Tudo ou Individual), Atualizar e Remover
 */
 
 const mensagens = [
-  "Primeira mensagem",
-  "Segunda mensagem"
+  {
+    "id": 1,
+    "texto": "Primeira mensagem"
+  },
+  {
+    "id": 2,
+    "texto": "Segunda mensagem"
+  }
 ];
 
 app.get('/', (req, res) => {
@@ -22,7 +28,9 @@ app.get('/', (req, res) => {
 
 // Criar (Create)
 app.post('/mensagens', (req, res) => {
-  const mensagem = req.body.texto;
+  const mensagem = req.body;
+
+  mensagem.id = mensagens.length + 1;
 
   mensagens.push(mensagem);
 
@@ -36,29 +44,33 @@ app.get('/mensagens', (req, res) => {
 
 // Ler Individual (Read Single)
 app.get('/mensagens/:id', (req, res) => {
-  const id = req.params.id - 1;
+  const id = +req.params.id;
 
-  const mensagem = mensagens[id];
+  const mensagem = mensagens.find(msg => msg.id === id);
   
   res.send(mensagem);
 });
 
 // Atualizar (Update)
 app.put('/mensagens/:id', (req, res) => {
-  const id = req.params.id - 1;
+  const id = +req.params.id;
 
-  const mensagem = req.body.texto;
+  const mensagem = req.body;
 
-  mensagens[id] = mensagem;
+  mensagem.id = id;
+
+  const index = mensagens.findIndex(msg => msg.id === id);
+  mensagens[index] = mensagem;
 
   res.send('Mensagem editada com sucesso.');
 });
 
 // Remoção (Delete)
 app.delete('/mensagens/:id', (req, res) => {
-  const id = req.params.id - 1;
+  const id = +req.params.id;
 
-  delete mensagens[id];
+  const index = mensagens.findIndex(msg => msg.id === id);
+  delete mensagens[index];
 
   res.send('Mensagem removida com sucesso.');
 });

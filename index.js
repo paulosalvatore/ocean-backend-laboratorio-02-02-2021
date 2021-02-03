@@ -27,8 +27,11 @@ app.get('/mensagens', (req, res) => {
 
 // Ler Individual (Read Single)
 app.get('/mensagens/:id', (req, res) => {
-  console.log(req.params);
-  res.send('Ler individual por ID.');
+  const id = req.params.id;
+
+  const mensagem = mensagens[id];
+  
+  res.send(mensagem);
 });
 
 // Criar (Create)

@@ -54,6 +54,15 @@ app.put('/mensagens/:id', (req, res) => {
   res.send('Mensagem editada com sucesso.');
 });
 
+// Remoção (Delete)
+app.delete('/mensagens/:id', (req, res) => {
+  const id = req.params.id - 1;
+
+  delete mensagens[id];
+
+  res.send('Mensagem removida com sucesso.');
+});
+
 app.listen(port, () => {
   console.info('Servidor rodando em http://localhost:' + port);
 });

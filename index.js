@@ -20,6 +20,15 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+// Criar (Create)
+app.post('/mensagens', (req, res) => {
+  const mensagem = req.body.texto;
+
+  mensagens.push(mensagem);
+
+  res.send('Mensagem criada com sucesso.');
+});
+
 // Ler Tudo (Read All)
 app.get('/mensagens', (req, res) => {
   res.send(mensagens);
@@ -32,15 +41,6 @@ app.get('/mensagens/:id', (req, res) => {
   const mensagem = mensagens[id];
   
   res.send(mensagem);
-});
-
-// Criar (Create)
-app.post('/mensagens', (req, res) => {
-  const mensagem = req.body.texto;
-
-  mensagens.push(mensagem);
-
-  res.send('Mensagem criada com sucesso.');
 });
 
 app.listen(port, () => {
